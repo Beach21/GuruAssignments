@@ -53,7 +53,7 @@ public class LoginTests {
   @Test
 
   public void testInvalidPassword() { 	  
-	  
+	  //New test
 	  String errorMessageString = "";
 	  String badPasswordString = "password";
 	  boolean isPasswordinMsg = false;

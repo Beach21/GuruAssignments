@@ -18,6 +18,7 @@ import org.testng.annotations.AfterTest;
 
 public class LoginTests {
 
+	//New comment
 	static WebDriver driver;
 	LoginPage loginPage;
 	

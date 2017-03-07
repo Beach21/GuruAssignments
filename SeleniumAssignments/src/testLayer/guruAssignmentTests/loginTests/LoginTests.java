@@ -18,7 +18,7 @@ import org.testng.annotations.AfterTest;
 
 public class LoginTests {
 
-	//New comment
+	//New comment gone. Because this is a new branch.
 	static WebDriver driver;
 	LoginPage loginPage;
 	

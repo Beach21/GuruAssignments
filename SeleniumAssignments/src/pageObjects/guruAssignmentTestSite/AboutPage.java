@@ -5,16 +5,28 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+/**
+ * About Page Object
+ * 
+ * <P>
+ * User comes here to after clicking the "About" link on the Login Page
+ * <P>
+ * Suitable locators, methods associated with this Page Object defined here
+ * 
+ * @author himanshu.keskar@gmail.com
+ * @version 1.0
+ */
+
 public class AboutPage {
 
-	// Variables and constants
+	/** Variables and constants */
 	final WebDriver driver;
 
-	// Locators
+	/** Locators */
 	@FindBy(how = How.XPATH, using = "username")
 	public WebElement txtbx_UserName;
 
-	// Methods
+	/** Methods */
 	public AboutPage(WebDriver driver) {
 
 		this.driver = driver;

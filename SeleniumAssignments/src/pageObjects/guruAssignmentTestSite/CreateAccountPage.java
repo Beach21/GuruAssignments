@@ -6,17 +6,25 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Create Account Page Object.
+ * 
+ * <P>
+ * User comes here before any other page
+ * <P>
+ * Suitable locators, methods associated with this Page Object defined here
+ * 
+ * @author himanshu.keskar@gmail.com
+ * @version 1.0
+ */
+
 public class CreateAccountPage {
 
-	/**
-	 * Variables and constants
-	 */
+	/** Variables and constants */
 
 	final WebDriver driver;
 
-	/**
-	 * Locators
-	 */
+	/** Locators */
 
 	@FindBy(how = How.XPATH, using = "//h2[@class]")
 	public WebElement hdr_CreateAccount;
@@ -27,16 +35,14 @@ public class CreateAccountPage {
 	@FindBy(how = How.ID, using = "password")
 	public WebElement txtbx_Password;
 
-	// Constructor
+	/** Constructor */
 
 	public CreateAccountPage(WebDriver driver) {
 
 		this.driver = driver;
 	}
 
-	/**
-	 * Methods
-	 */
+	/** Methods */
 
 	/*
 	 * Checks if Next button is visible on the page and indirectly that the

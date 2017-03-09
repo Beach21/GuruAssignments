@@ -6,10 +6,24 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Login Page Object
+ * 
+ * <P>
+ * User comes here before any other page
+ * <P>
+ * Suitable locators, methods associated with this Page Object defined here
+ * 
+ * @author himanshu.keskar@gmail.com
+ * @version 1.0
+ */
+
 public class LoginPage {
 
+	/** Variables and constants */
 	final WebDriver driver;
 
+	/** Locators */
 	@FindBy(how = How.ID, using = "username")
 	public WebElement txtbx_UserName;
 
@@ -31,12 +45,13 @@ public class LoginPage {
 	@FindBy(how = How.XPATH, using = "")
 	public WebElement div_ErrMsg_MssngNamePassword;
 
+	/** Constructor */
 	public LoginPage(WebDriver driver) {
 
 		this.driver = driver;
 	}
 
-	// This method will take two arguments ( User name and Password)
+	/** Methods */
 
 	public void login(String sUserName, String sPassword) {
 

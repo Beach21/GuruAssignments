@@ -5,25 +5,40 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+/**
+ * Forgot Password Page Object
+ * 
+ * <P>
+ * User comes here from Login Page
+ * <P>
+ * Suitable locators, methods associated with this Page Object defined here
+ * 
+ * @author himanshu.keskar@gmail.com
+ * @version 1.0
+ */
+
 public class ForgotPasswordPage {
 
-	// Variables and constants
+	/** Variables and constants */
 	final WebDriver driver;
 
-	// Locators
+	/** Locators */
 	@FindBy(how = How.ID, using = "SecurityQuestionID")
 	public WebElement drpDwn_SecurityQuestion;
 
-	// Methods
+	/** Constructor */
 	public ForgotPasswordPage(WebDriver driver) {
 
 		this.driver = driver;
 	}
 
+	/** Methods */
 	public String getPageURL() {
 
 		return driver.getCurrentUrl();
 	}
+
+	// Checks if the navigation to the page is correct
 
 	public boolean isForgotPWPageURLNavigated(WebDriver driver) {
 		String currentURL = driver.getCurrentUrl();
@@ -40,10 +55,10 @@ public class ForgotPasswordPage {
 			return false;
 		}
 	}
-	
+
 	/*
-	 * Checks if security question drop down is visible on the page and indirectly that the
-	 * Create Account page is loaded
+	 * Checks if security question drop down is visible on the page and
+	 * indirectly that the Create Account page is loaded
 	 */
 	public boolean isForgotPasswordPageLoaded() {
 

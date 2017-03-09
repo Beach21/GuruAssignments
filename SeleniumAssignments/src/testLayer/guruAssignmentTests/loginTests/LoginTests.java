@@ -6,10 +6,14 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
+
+import pageObjects.guruAssignmentTestSite.CreateAccountPage;
 import pageObjects.guruAssignmentTestSite.LoginPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -17,8 +21,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 
 public class LoginTests {
-
-	//New comment gone. Because this is a new branch.
+	
+	//New comment
 	static WebDriver driver;
 	LoginPage loginPage;
 	
@@ -108,13 +112,30 @@ public class LoginTests {
 	  boolean passwordRequirement = loginPage.isPasswordRequired();	 
       Assert.assertTrue("Password field is not a required field", passwordRequirement);
   }
+  
+  /**
+   * Tests to access other pages
+   */
+  
+  @Test
+  
+ public void testAccessCreateAccountPg() { 
+	
+	  boolean isCreateAccountPageLoaded = false;
+	  CreateAccountPage ca = loginPage.createAccount();	
+	  isCreateAccountPageLoaded = ca.isCreateAccountPageLoaded();
+	  
+	  Assert.assertTrue("Create Account page not loaded", isCreateAccountPageLoaded);	 
+  }
+  
+  
 
   @AfterTest
 
   public void cleanUp() {
 	  
      if(driver != null) {
-    	 driver.close();
+    	 //driver.close();
      }
 	 
   }

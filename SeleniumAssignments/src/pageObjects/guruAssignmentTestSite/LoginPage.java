@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
@@ -16,10 +17,18 @@ public class LoginPage {
 	public WebElement txtbx_Password;
 
 	@FindBy(how = How.NAME, using = "btn-login")
-	public WebElement btn_Login ;
+	public WebElement btn_Login ;	
 	
+	@FindBy(how = How.XPATH, using = "//a[contains(@href, 'create')]")
+	public WebElement lnk_CreateAcct;
 	
-	@FindBy(how = How.XPATH, using = "//div[contains(@class,'errmsg')]")
+	@FindBy(how = How.XPATH, using = "//a[contains(@href, 'forgot')]")
+	public WebElement lnk_ResetPassword;
+	
+	@FindBy(how = How.XPATH, using = "//a[contains(@href, 'about')]")
+	public WebElement lnk_About;			
+		
+	@FindBy(how = How.XPATH, using = "")
 	public WebElement div_ErrMsg_MssngNamePassword;
 
 	public LoginPage (WebDriver driver)	{
@@ -61,6 +70,37 @@ public boolean isPasswordRequired(){
 			return false;
 		}
 	}
+
+// Returns a Create Account Page object
+public boolean clickCreateAcct(){
+	
+	try {
+		WebElement ca = lnk_CreateAcct;
+		ca.click();
+		driver.wait(6000);
+		//return new CreateAccountPage(driver);
+		
+	} catch (Exception e) {
+		// If element not found 
+		System.out.println(e.getMessage());
+		System.out.println("Create Account link not found");
+		//return null;
+	}	
+		//return new CreateAccountPage(driver);
+	
+	return true;
+	
+}
+
+//Returns a Create Account Page object
+public CreateAccountPage createAccount (){	
+	
+		WebElement ca = lnk_CreateAcct;
+		ca.click();	
+		
+		return PageFactory.initElements(driver, CreateAccountPage.class);
+		//return new CreateAccountPage(driver);		
+}
 
 /*
  * Checks if the user name text box is visible on the page and indirectly

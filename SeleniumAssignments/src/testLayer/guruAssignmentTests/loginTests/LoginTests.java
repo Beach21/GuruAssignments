@@ -13,7 +13,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
+import pageObjects.guruAssignmentTestSite.AboutPage;
 import pageObjects.guruAssignmentTestSite.CreateAccountPage;
+import pageObjects.guruAssignmentTestSite.ForgotPasswordPage;
 import pageObjects.guruAssignmentTestSite.LoginPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -128,6 +130,28 @@ public class LoginTests {
 	  Assert.assertTrue("Create Account page not loaded", isCreateAccountPageLoaded);	 
   }
   
+  @Test
+  
+  public void testAccessAboutPg() { 
+ 	
+	  boolean isAboutPageLoaded = false;
+ 	  AboutPage ap = loginPage.clickLnkAbout();	
+ 	  isAboutPageLoaded = ap.isAboutPageLoaded(driver);
+ 	  
+ 	  Assert.assertTrue(" 'About' page not loaded", isAboutPageLoaded);	 
+   }
+  
+@Test
+  
+  public void testAccessForgotPasswordPg() { 
+ 	
+ 	  boolean isForgotPasswordPageLoaded = false;
+ 	  ForgotPasswordPage fp = loginPage.clickLnkResetPassword();	
+ 	  isForgotPasswordPageLoaded = fp.isForgotPasswordPageLoaded();
+ 	  
+ 	  Assert.assertTrue("Create Account page not loaded", isForgotPasswordPageLoaded);	 
+   }
+  
   
 
   @AfterTest
@@ -135,7 +159,7 @@ public class LoginTests {
   public void cleanUp() {
 	  
      if(driver != null) {
-    	 //driver.close();
+    	// driver.close();
      }
 	 
   }

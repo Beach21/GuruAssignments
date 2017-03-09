@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
 
 	final WebDriver driver;
-	
+
 	@FindBy(how = How.ID, using = "username")
 	public WebElement txtbx_UserName;
 
@@ -17,106 +17,131 @@ public class LoginPage {
 	public WebElement txtbx_Password;
 
 	@FindBy(how = How.NAME, using = "btn-login")
-	public WebElement btn_Login ;	
-	
+	public WebElement btn_Login;
+
 	@FindBy(how = How.XPATH, using = "//a[contains(@href, 'create')]")
 	public WebElement lnk_CreateAcct;
-	
+
 	@FindBy(how = How.XPATH, using = "//a[contains(@href, 'forgot')]")
 	public WebElement lnk_ResetPassword;
-	
+
 	@FindBy(how = How.XPATH, using = "//a[contains(@href, 'about')]")
-	public WebElement lnk_About;			
-		
+	public WebElement lnk_About;
+
 	@FindBy(how = How.XPATH, using = "")
 	public WebElement div_ErrMsg_MssngNamePassword;
 
-	public LoginPage (WebDriver driver)	{
+	public LoginPage(WebDriver driver) {
 
 		this.driver = driver;
-	}	
-	
+	}
 
-// This method will take two arguments ( User name and Password)
+	// This method will take two arguments ( User name and Password)
 
-	public void login(String sUserName, String sPassword){
+	public void login(String sUserName, String sPassword) {
 
 		txtbx_UserName.sendKeys(sUserName);
 		txtbx_Password.sendKeys(sPassword);
 		btn_Login.click();
 	}
-	
 
-	public WebElement getBadNamePassWordMsg(){
-		
+	public WebElement getBadNamePassWordMsg() {
+
 		if (div_ErrMsg_MssngNamePassword != null) {
 			System.out.println("Error message is: " + div_ErrMsg_MssngNamePassword.getText());
 			return div_ErrMsg_MssngNamePassword;
-		}
-		else {
+		} else {
 			System.out.println("Error message for invalid name/password not displayed");
 			return null;
 		}
 	}
-	
-public boolean isPasswordRequired(){
-		
+
+	public boolean isPasswordRequired() {
+
 		if (txtbx_Password.getAttribute("required") != null) {
 			System.out.println("Password field is required");
 			return true;
-		}
-		else {
+		} else {
 			System.out.println("Password field is not required");
 			return false;
 		}
 	}
 
-// Returns a Create Account Page object
-public boolean clickCreateAcct(){
-	
-	try {
-		WebElement ca = lnk_CreateAcct;
-		ca.click();
-		driver.wait(6000);
-		//return new CreateAccountPage(driver);
-		
-	} catch (Exception e) {
-		// If element not found 
-		System.out.println(e.getMessage());
-		System.out.println("Create Account link not found");
-		//return null;
-	}	
-		//return new CreateAccountPage(driver);
-	
-	return true;
-	
-}
+	// Clicks on "Create Account" link and returns a Create Account Page object
+	public boolean clickCreateAcct() {
 
-//Returns a Create Account Page object
-public CreateAccountPage createAccount (){	
-	
-		WebElement ca = lnk_CreateAcct;
-		ca.click();	
-		
-		return PageFactory.initElements(driver, CreateAccountPage.class);
-		//return new CreateAccountPage(driver);		
-}
+		try {
+			WebElement ca = lnk_CreateAcct;
+			ca.click();
+			driver.wait(6000);
 
-/*
- * Checks if the user name text box is visible on the page and indirectly
- * that the Login page is loaded
- */
-public boolean isLoginPageLoaded (){
-	
-	WebElement un = txtbx_UserName;
-	
-	if (un != null){			
+		} catch (Exception e) {
+			// If element not found
+			System.out.println(e.getMessage());
+			System.out.println("Create Account link not found");
+		}
+
 		return true;
+
 	}
-	
-	else {
-		return false;
+
+	// Clicks on "Create Account" link and returns a Create Account Page object
+	public CreateAccountPage createAccount() {
+
+		try {
+			WebElement ca = lnk_CreateAcct;
+			ca.click();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(" 'Create Account' link could not be clicked successfully");
+		}
+
+		return PageFactory.initElements(driver, CreateAccountPage.class);
 	}
-}
+
+	// Returns an About page object
+	public AboutPage clickLnkAbout() {
+
+		try {
+			WebElement ca = lnk_About;
+			ca.click();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(" 'About' link could not be clicked successfully");
+		}
+
+		return PageFactory.initElements(driver, AboutPage.class);
+	}
+
+	// Returns a Forgot Password page object
+	public ForgotPasswordPage clickLnkResetPassword() {
+
+		try {
+			WebElement rp = lnk_ResetPassword;
+			rp.click();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println(" 'Reset Password' link could not be clicked successfully");
+		}
+
+		return PageFactory.initElements(driver, ForgotPasswordPage.class);
+	}
+
+	/*
+	 * Checks if the user name text box is visible on the page and indirectly
+	 * that the Login page is loaded
+	 */
+	public boolean isLoginPageLoaded() {
+
+		WebElement un = txtbx_UserName;
+
+		if (un != null) {
+			return true;
+		}
+
+		else {
+			return false;
+		}
+	}
 
 }

@@ -1,46 +1,32 @@
 package testLayer.guruAssignmentTests.loginTests;
 
-import static org.testng.Assert.assertTrue;
-
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import pageObjects.guruAssignmentTestSite.AboutPage;
 import pageObjects.guruAssignmentTestSite.CreateAccountPage;
 import pageObjects.guruAssignmentTestSite.ForgotPasswordPage;
-import pageObjects.guruAssignmentTestSite.LoginPage;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 
-public class LoginTests {
+public class LoginTests extends BaseTest{
 	
-	//New comment
-	static WebDriver driver;
-	LoginPage loginPage;
 	
   @BeforeTest  
   public void setUp() {
-
-	  String baseURL = "https://www.leagueplanit.com";		
-	  System.setProperty("webdriver.chrome.driver", "C:\\Work\\Practice\\Selenium\\chromedriver_win32\\chromedriver.exe");
-      driver = new ChromeDriver();
-      driver.manage().window().maximize();        
-	  driver.get(baseURL);
-      driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-      driver.get(baseURL);
-
-      loginPage = PageFactory.initElements(driver, LoginPage.class);      
+	  
+	super.setUp();    
   }
+    
+
+  @AfterTest
+
+  public void cleanUp() {	  
+   
+	 super.cleanUp();
+  }
+
   
   
   @Test
@@ -54,7 +40,7 @@ public class LoginTests {
       loginPage.login("invalidUserName", "password");      
       errorMessageString = loginPage.getBadNamePassWordMsg().getText();
       isUserNameinMsg = StringUtils.containsIgnoreCase(errorMessageString, badUserNameString);    
-      Assert.assertTrue("Correct message is not displayed for incorrect user name", isUserNameinMsg);
+      Assert.assertTrue(isUserNameinMsg, "Correct message not displayed for invalid user name");
   }
   
   @Test
@@ -68,7 +54,7 @@ public class LoginTests {
       loginPage.login("Username", "invalidPassword");      
       errorMessageString = loginPage.getBadNamePassWordMsg().getText();
       isPasswordinMsg = StringUtils.containsIgnoreCase(errorMessageString, badPasswordString);    
-      Assert.assertTrue("Correct message is not displayed for incorrect password", isPasswordinMsg);
+      Assert.assertTrue(isPasswordinMsg, "Correct message is not displayed for incorrect password");
   }
   
   @Test
@@ -89,7 +75,7 @@ public class LoginTests {
       
       // Make sure both user name and password are mentioned in the error message
       isUserNameAndPassWdinMsg = (isUserNameinMsg)&&(isPasswordinMsg);
-      Assert.assertTrue("Correct message is not displayed for incorrect user name and password", isUserNameAndPassWdinMsg);
+      Assert.assertTrue(isUserNameAndPassWdinMsg, "Correct message is not displayed for incorrect user name and password");
   }
   
   @Test
@@ -104,7 +90,7 @@ public class LoginTests {
       loginPage.login("", "password");      
       errorMessageString = loginPage.getBadNamePassWordMsg().getText();
       isUserNameinMsg = StringUtils.containsIgnoreCase(errorMessageString, badUserNameString);    
-      Assert.assertTrue("Correct message is not displayed for incorrect user name", isUserNameinMsg);
+      Assert.assertTrue(isUserNameinMsg, "Correct message is not displayed for incorrect user name");
   }
   
   @Test
@@ -112,7 +98,7 @@ public class LoginTests {
   public void testBlankPassword() { 
 	  
 	  boolean passwordRequirement = loginPage.isPasswordRequired();	 
-      Assert.assertTrue("Password field is not a required field", passwordRequirement);
+      Assert.assertTrue(passwordRequirement, "Password field is not a required field");
   }
   
   /**
@@ -127,7 +113,7 @@ public class LoginTests {
 	  CreateAccountPage ca = loginPage.createAccount();	
 	  isCreateAccountPageLoaded = ca.isCreateAccountPageLoaded();
 	  
-	  Assert.assertTrue("Create Account page not loaded", isCreateAccountPageLoaded);	 
+	  Assert.assertTrue(isCreateAccountPageLoaded, "Create Account page not loaded");	 
   }
   
   @Test
@@ -138,7 +124,7 @@ public class LoginTests {
  	  AboutPage ap = loginPage.clickLnkAbout();	
  	  isAboutPageLoaded = ap.isAboutPageLoaded(driver);
  	  
- 	  Assert.assertTrue(" 'About' page not loaded", isAboutPageLoaded);	 
+ 	  Assert.assertTrue(isAboutPageLoaded, " 'About' page not loaded");	 
    }
   
 @Test
@@ -149,20 +135,8 @@ public class LoginTests {
  	  ForgotPasswordPage fp = loginPage.clickLnkResetPassword();	
  	  isForgotPasswordPageLoaded = fp.isForgotPasswordPageLoaded();
  	  
- 	  Assert.assertTrue("Create Account page not loaded", isForgotPasswordPageLoaded);	 
-   }
-  
-  
-
-  @AfterTest
-
-  public void cleanUp() {
-	  
-     if(driver != null) {
-    	// driver.close();
-     }
-	 
-  }
+ 	  Assert.assertTrue(isForgotPasswordPageLoaded, "Create Account page not loaded");	 
+   }  
 
 }
 
